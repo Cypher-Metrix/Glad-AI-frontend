@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #191022;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #473b54;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5d4e6d;
+}
+
+/* Glass panel effect */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Neon text effect */
+.neon-text {
+  text-shadow: 0 0 10px rgba(127, 13, 242, 0.5);
+}
+
+/* Custom animations */
+@keyframes gauge-fill {
+  from { stroke-dashoffset: 180; }
+  to { stroke-dashoffset: 60; }
+}
+
+.gauge-animation {
+  animation: gauge-fill 1.5s ease-out forwards;
+}
+
+/* Selection styling */
+::selection {
+  background: #7f0df2;
+  color: white;
+}
+
+/* Focus styles */
+.focus-ring:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: rgba(127, 13, 242, 0.5);
+  border-color: #7f0df2;
+}

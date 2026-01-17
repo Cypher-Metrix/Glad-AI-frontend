@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Performance Monitor - GLAD AI</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f0df2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                        "card-dark": "#231b2e", // Slightly lighter than background-dark for cards
+                        "sidebar-dark": "#141118",
+                        "accent-cyan": "#0bda73",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for the terminal */
+        .terminal-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .terminal-scroll::-webkit-scrollbar-track {
+            background: #141118; 
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: #473b54; 
+            border-radius: 4px;
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #5d4e6d; 
+        }
+
+        /* Gauge Animations */
+        @keyframes gauge-fill-1 {
+            from { stroke-dashoffset: 180; }
+            to { stroke-dashoffset: 60; }
+        }
+        @keyframes gauge-fill-2 {
+            from { stroke-dashoffset: 180; }
+            to { stroke-dashoffset: 30; }
+        }
+        .gauge-anim-1 {
+            animation: gauge-fill-1 1.5s ease-out forwards;
+        }
+        .gauge-anim-2 {
+            animation: gauge-fill-2 1.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden antialiased">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SIDEBAR -->
+<aside class="flex w-72 flex-col justify-between border-r border-[#302839] bg-sidebar-dark p-4 shrink-0 overflow-y-auto">
+<div class="flex flex-col gap-6">
+<!-- Logo -->
+<div class="flex items-center gap-3 px-2">
+<div class="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[#4a00e0] shadow-[0_0_15px_rgba(127,13,242,0.4)]" data-alt="GLAD AI Logo Abstract">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">smart_toy</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold tracking-tight">GLAD AI</h1>
+<p class="text-[#ab9cba] text-xs font-medium uppercase tracking-wider">Admin Panel</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[#ab9cba] hover:bg-[#302839] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[#ab9cba] hover:bg-[#302839] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">group</span>
+<span class="text-sm font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[#ab9cba] hover:bg-[#302839] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">description</span>
+<span class="text-sm font-medium">Transaction Logs</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[#ab9cba] hover:bg-[#302839] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">payments</span>
+<span class="text-sm font-medium">Revenue</span>
+</a>
+<!-- Active Item -->
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 bg-primary text-white shadow-[0_0_20px_rgba(127,13,242,0.4)] transition-all" href="#">
+<span class="material-symbols-outlined fill-current">monitoring</span>
+<span class="text-sm font-medium">AI Performance</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[#ab9cba] hover:bg-[#302839] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">notifications</span>
+<span class="text-sm font-medium">Notifications</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-[#ab9cba] hover:bg-[#302839] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-white transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Profile -->
+<div class="mt-auto border-t border-[#302839] pt-4">
+<div class="flex items-center gap-3 rounded-lg px-3 py-2 hover:bg-[#302839] transition-colors cursor-pointer">
+<div class="h-10 w-10 overflow-hidden rounded-full border border-[#473b54]">
+<img alt="Portrait of Alex Morgan, Admin Profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEPc3U-CZ-OmlxBpUyQKnBCk1JsPLVUSHphaGn85L5GJypsRjLStDR3M6pEmgBj9ITrotrCdUa126OFb-SgG396RBiD1vy6CDH1ge66QjhM-rOR5ltZPUloA5P1shwiGbep46B7SOrYvNri63bIPknNBUW1nhqwb50KpkBwH0h0H6bQ-89wxmm5eC0kITvZ7MVUG9Gm3B7Np-UU8uQZhtQJZUG10IXWwqqtTqaoWkgrQhsDjCIX8c6iwVsBvznf3ONijgh2qNnumcn"/>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-medium text-white">Alex Morgan</p>
+<p class="text-xs text-[#ab9cba]">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Background Glow Effect -->
+<div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<!-- Header -->
+<header class="flex-none px-8 py-6 z-10">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl font-black text-white tracking-tight">AI Performance Monitor</h1>
+<div class="flex items-center gap-2 text-[#ab9cba]">
+<span class="text-sm">Real-time latency tracking and cost analysis</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30">Live</span>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto px-8 pb-8 z-10 custom-scrollbar">
+<div class="flex flex-col gap-6 max-w-[1400px]">
+<!-- GAUGES SECTION -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Gauge 1: Whisper -->
+<div class="relative flex items-center justify-between rounded-2xl border border-[#473b54] bg-card-dark p-6 shadow-lg overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex flex-col gap-2 z-10">
+<p class="text-[#ab9cba] font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">graphic_eq</span>
+                                    Avg Whisper Latency
+                                </p>
+<p class="text-4xl font-bold text-white tracking-tight">1.2s</p>
+<span class="inline-flex w-fit items-center rounded-md bg-[#0bda73]/10 px-2.5 py-1 text-sm font-medium text-[#0bda73] ring-1 ring-inset ring-[#0bda73]/20">
+                                    Optimal
+                                </span>
+</div>
+<!-- SVG Gauge Visualization -->
+<div class="relative h-32 w-32 flex items-center justify-center">
+<svg class="h-full w-full -rotate-90 transform" viewbox="0 0 100 100">
+<!-- Background Track -->
+<circle cx="50" cy="50" fill="none" r="40" stroke="#302839" stroke-linecap="round" stroke-width="10"></circle>
+<!-- Progress Arc -->
+<circle class="gauge-anim-1" cx="50" cy="50" fill="none" r="40" stroke="#0bda73" stroke-dasharray="251.2" stroke-dashoffset="60" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#0bda73] text-3xl drop-shadow-[0_0_8px_rgba(11,218,115,0.5)]">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Gauge 2: GPT Response -->
+<div class="relative flex items-center justify-between rounded-2xl border border-[#473b54] bg-card-dark p-6 shadow-lg overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex flex-col gap-2 z-10">
+<p class="text-[#ab9cba] font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">psychology</span>
+                                    Avg GPT Response Time
+                                </p>
+<p class="text-4xl font-bold text-white tracking-tight">0.8s</p>
+<span class="inline-flex w-fit items-center rounded-md bg-primary/20 px-2.5 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/40 shadow-[0_0_10px_rgba(127,13,242,0.2)]">
+                                    Fast
+                                </span>
+</div>
+<!-- SVG Gauge Visualization -->
+<div class="relative h-32 w-32 flex items-center justify-center">
+<svg class="h-full w-full -rotate-90 transform" viewbox="0 0 100 100">
+<!-- Background Track -->
+<circle cx="50" cy="50" fill="none" r="40" stroke="#302839" stroke-linecap="round" stroke-width="10"></circle>
+<!-- Progress Arc -->
+<circle class="gauge-anim-2" cx="50" cy="50" fill="none" r="40" stroke="#7f0df2" stroke-dasharray="251.2" stroke-dashoffset="30" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl drop-shadow-[0_0_8px_rgba(127,13,242,0.6)]">bolt</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CHART SECTION -->
+<div class="rounded-2xl border border-[#473b54] bg-card-dark p-6 shadow-xl">
+<div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+<div>
+<h2 class="text-lg font-bold text-white">Daily API Cost Breakdown</h2>
+<p class="text-sm text-[#ab9cba]">GPT-4 vs Whisper-v2 usage costs (Last 30 Days)</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="h-3 w-3 rounded-full bg-primary shadow-[0_0_8px_rgba(127,13,242,0.6)]"></span>
+<span class="text-sm font-medium text-white">GPT-4</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="h-3 w-3 rounded-full bg-[#0bda73] shadow-[0_0_8px_rgba(11,218,115,0.6)]"></span>
+<span class="text-sm font-medium text-white">Whisper-v2</span>
+</div>
+<button class="ml-2 flex items-center gap-2 rounded-lg bg-[#302839] px-3 py-1.5 text-sm font-medium text-white hover:bg-[#473b54] transition-colors">
+<span>Last 30 Days</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Main Chart Area -->
+<div class="relative h-64 w-full">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between text-xs text-[#473b54]">
+<div class="border-b border-[#302839]/50 w-full"></div>
+<div class="border-b border-[#302839]/50 w-full"></div>
+<div class="border-b border-[#302839]/50 w-full"></div>
+<div class="border-b border-[#302839]/50 w-full"></div>
+<div class="border-b border-[#302839]/50 w-full"></div>
+</div>
+<!-- SVG Chart -->
+<svg class="absolute inset-0 h-full w-full overflow-visible" preserveaspectratio="none" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="gradientPrimary" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#7f0df2" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#7f0df2" stop-opacity="0"></stop>
+</lineargradient>
+<lineargradient id="gradientSecondary" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#0bda73" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#0bda73" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Whisper Line (Secondary) -->
+<path d="M0 150 Q 100 160, 200 130 T 400 140 T 600 110 T 800 130 T 1000 100 V 200 H 0 Z" fill="url(#gradientSecondary)"></path>
+<path class="drop-shadow-[0_0_4px_rgba(11,218,115,0.4)]" d="M0 150 Q 100 160, 200 130 T 400 140 T 600 110 T 800 130 T 1000 100" fill="none" stroke="#0bda73" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<!-- GPT Line (Primary) -->
+<path d="M0 100 Q 150 80, 300 110 T 500 60 T 700 80 T 900 40 T 1000 20 V 200 H 0 Z" fill="url(#gradientPrimary)"></path>
+<path class="drop-shadow-[0_0_6px_rgba(127,13,242,0.5)]" d="M0 100 Q 150 80, 300 110 T 500 60 T 700 80 T 900 40 T 1000 20" fill="none" stroke="#7f0df2" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+</div>
+<!-- X-Axis Labels -->
+<div class="mt-2 flex justify-between px-2 text-xs font-medium text-[#ab9cba]">
+<span>Jun 1</span>
+<span>Jun 5</span>
+<span>Jun 10</span>
+<span>Jun 15</span>
+<span>Jun 20</span>
+<span>Jun 25</span>
+<span>Jun 30</span>
+</div>
+</div>
+<!-- LIVE STREAM TERMINAL -->
+<div class="flex flex-col rounded-2xl border border-[#473b54] bg-[#0d0a12] shadow-xl overflow-hidden">
+<div class="flex items-center justify-between border-b border-[#302839] bg-[#141118] px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary animate-pulse text-base">terminal</span>
+<h3 class="text-sm font-bold text-white tracking-wide uppercase">Live API Stream</h3>
+</div>
+<div class="flex gap-1.5">
+<div class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></div>
+<div class="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></div>
+<div class="h-2.5 w-2.5 rounded-full bg-[#28c840]"></div>
+</div>
+</div>
+<div class="font-mono text-xs md:text-sm p-4 h-64 overflow-y-auto terminal-scroll text-[#e5e7eb] flex flex-col gap-1">
+<!-- Terminal Lines -->
+<div class="flex gap-3 opacity-50">
+<span class="text-[#ab9cba]">14:02:18</span>
+<span class="text-blue-400">INFO</span>
+<span>Initializing stream connection...</span>
+</div>
+<div class="flex gap-3 opacity-60">
+<span class="text-[#ab9cba]">14:02:19</span>
+<span class="text-green-400">SUCCESS</span>
+<span>Connected to wss://api.glad.ai/v1/stream</span>
+</div>
+<div class="my-1 border-t border-[#302839]/50"></div>
+<div class="flex gap-2">
+<span class="text-[#ab9cba] shrink-0">14:02:21</span>
+<span class="text-[#a6accd]">{ "model": "<span class="text-primary">gpt-4</span>", "status": <span class="text-green-400">200</span>, "latency": "820ms", "tokens": 450, "cost": "$0.0135" }</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#ab9cba] shrink-0">14:02:23</span>
+<span class="text-[#a6accd]">{ "model": "<span class="text-[#0bda73]">whisper-1</span>", "status": <span class="text-green-400">200</span>, "latency": "1100ms", "duration": "12.4s", "cost": "$0.006" }</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#ab9cba] shrink-0">14:02:24</span>
+<span class="text-[#a6accd]">{ "model": "<span class="text-primary">gpt-4</span>", "status": <span class="text-green-400">200</span>, "latency": "650ms", "tokens": 120, "cost": "$0.0036" }</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#ab9cba] shrink-0">14:02:28</span>
+<span class="text-[#a6accd]">{ "model": "<span class="text-primary">gpt-3.5-turbo</span>", "status": <span class="text-green-400">200</span>, "latency": "320ms", "tokens": 890, "cost": "$0.0018" }</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#ab9cba] shrink-0">14:02:30</span>
+<span class="text-[#a6accd]">{ "model": "<span class="text-[#0bda73]">whisper-1</span>", "status": <span class="text-green-400">200</span>, "latency": "980ms", "duration": "8.2s", "cost": "$0.0041" }</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#ab9cba] shrink-0">14:02:35</span>
+<span class="text-[#a6accd]">{ "model": "<span class="text-primary">gpt-4</span>", "status": <span class="text-red-400">429</span>, "error": "Rate limit exceeded", "retry_after": "2s" }</span>
+</div>
+<div class="flex gap-2">
+<span class="text-[#ab9cba] shrink-0">14:02:37</span>
+<span class="text-[#a6accd]">{ "model": "<span class="text-primary">gpt-4</span>", "status": <span class="text-green-400">200</span>, "latency": "1400ms", "tokens": 1500, "cost": "$0.0450" }</span>
+</div>
+<!-- Blinking Cursor -->
+<div class="mt-1 flex items-center gap-2">
+<span class="text-primary">➜</span>
+<span class="h-4 w-2 bg-white animate-pulse"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GLAD AI Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f0df2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#0f0b15", // Deep midnight
+                        "card-dark": "#1a1625",
+                        "accent-cyan": "#00f0ff",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                    boxShadow: {
+                        "neon": "0 0 15px rgba(127, 13, 242, 0.4)",
+                        "glass": "0 4px 30px rgba(0, 0, 0, 0.1)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for the dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0b15; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d2438; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3e324d; 
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(127, 13, 242, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-white font-display overflow-hidden selection:bg-primary selection:text-white">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="w-64 flex-none hidden md:flex flex-col justify-between border-r border-white/5 bg-[#141118]">
+<!-- Logo & Nav -->
+<div class="flex flex-col gap-8 p-6">
+<!-- Logo -->
+<div class="flex items-center gap-2">
+<div class="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-purple-900 flex items-center justify-center shadow-neon">
+<span class="material-symbols-outlined text-white text-[20px]">smart_toy</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-white neon-text">GLAD AI</h1>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-6">
+<!-- Main Group -->
+<div class="flex flex-col gap-2">
+<p class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1 pl-3">Main Menu</p>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary shadow-neon text-white transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span class="text-sm font-medium">Transaction Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="text-sm font-medium">Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span class="text-sm font-medium">AI Performance</span>
+</a>
+</div>
+<!-- System Group -->
+<div class="flex flex-col gap-2">
+<p class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1 pl-3">System</p>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="text-sm font-medium">Notifications</span>
+<span class="ml-auto bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full">3</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</nav>
+</div>
+<!-- Footer / Profile -->
+<div class="p-4 border-t border-white/5">
+<div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 flex items-center justify-center overflow-hidden border border-white/10">
+<!-- Placeholder avatar -->
+<img alt="Alex Morgan" class="h-full w-full object-cover" data-alt="Profile picture of administrator Alex Morgan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAceTuIQPk3GZUvjJVguGB5Y-PY-HNtwUsMy8-IMpnRZHNy1sVP2zr7vZDITrkQi3qXk_A1Xd0XOhoqd84kKQ-jrj6FX2lwSfQoUXfTdssaY5ozkFU1pymenajdXtLNiqgwEtGab6OE2JCS4bT2At_-CC7TsIDT795iu7zSw2e6NQzLTJklTKJQJwmnzezaf-njGjln8J0SDNVZp9uwxcOstZNtiiLMWGzlV7-6GnbbLe2-xb7ERBC1X4TtbIvwf20cQgSIJF3oVN-E"/>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-white">Alex Morgan</p>
+<p class="text-xs text-gray-400">Admin</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-400 transition-colors">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Header -->
+<header class="flex-none h-20 px-8 flex items-center justify-between border-b border-white/5 bg-background-dark/50 backdrop-blur-sm z-10">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-white"><span class="material-symbols-outlined">menu</span></button>
+<h2 class="text-2xl font-bold text-white tracking-tight">Main Dashboard</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search Bar -->
+<div class="relative hidden sm:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 material-symbols-outlined text-[20px]">search</span>
+<input class="h-10 w-64 bg-[#1e1926] border-none rounded-full pl-10 pr-4 text-sm text-white placeholder-gray-500 focus:ring-1 focus:ring-primary focus:bg-[#251f30] transition-all" placeholder="Search system data..." type="text"/>
+</div>
+<!-- Notification Bell -->
+<button class="relative p-2 rounded-full hover:bg-white/5 transition-colors text-gray-300">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-accent-cyan shadow-[0_0_8px_#00f0ff]"></span>
+</button>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<!-- Metrics Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+<!-- Card 1: Users -->
+<div class="glass-panel rounded-2xl p-6 flex flex-col gap-4 group hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start">
+<div class="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="flex items-center gap-1 text-xs font-medium text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded-full border border-emerald-400/20">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +5%
+                                </span>
+</div>
+<div>
+<p class="text-gray-400 text-sm font-medium">Total Users</p>
+<p class="text-2xl md:text-3xl font-bold text-white mt-1">12,450</p>
+</div>
+</div>
+<!-- Card 2: Revenue -->
+<div class="glass-panel rounded-2xl p-6 flex flex-col gap-4 group hover:border-accent-cyan/30 transition-colors">
+<div class="flex justify-between items-start">
+<div class="p-3 rounded-lg bg-accent-cyan/10 text-accent-cyan group-hover:bg-accent-cyan/20 transition-colors">
+<span class="material-symbols-outlined">attach_money</span>
+</div>
+<span class="flex items-center gap-1 text-xs font-medium text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded-full border border-emerald-400/20">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12%
+                                </span>
+</div>
+<div>
+<p class="text-gray-400 text-sm font-medium">Daily Revenue</p>
+<p class="text-2xl md:text-3xl font-bold text-white mt-1">$3,240</p>
+</div>
+</div>
+<!-- Card 3: Server Load -->
+<div class="glass-panel rounded-2xl p-6 flex flex-col gap-4 group hover:border-purple-400/30 transition-colors">
+<div class="flex justify-between items-start">
+<div class="p-3 rounded-lg bg-purple-500/10 text-purple-400 group-hover:bg-purple-500/20 transition-colors">
+<span class="material-symbols-outlined">dns</span>
+</div>
+<span class="flex items-center gap-1 text-xs font-medium text-emerald-400 bg-emerald-400/10 px-2 py-1 rounded-full border border-emerald-400/20">
+                                    Normal
+                                </span>
+</div>
+<div>
+<p class="text-gray-400 text-sm font-medium">AI Server Load</p>
+<div class="flex items-end gap-2">
+<p class="text-2xl md:text-3xl font-bold text-white mt-1">42%</p>
+</div>
+<div class="w-full bg-white/10 h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-purple-400 h-full rounded-full" style="width: 42%"></div>
+</div>
+</div>
+</div>
+<!-- Card 4: Pending Tickets -->
+<div class="glass-panel rounded-2xl p-6 flex flex-col gap-4 group hover:border-orange-400/30 transition-colors">
+<div class="flex justify-between items-start">
+<div class="p-3 rounded-lg bg-orange-500/10 text-orange-400 group-hover:bg-orange-500/20 transition-colors">
+<span class="material-symbols-outlined">confirmation_number</span>
+</div>
+<span class="flex items-center gap-1 text-xs font-medium text-orange-400 bg-orange-400/10 px-2 py-1 rounded-full border border-orange-400/20">
+                                    Needs Action
+                                </span>
+</div>
+<div>
+<p class="text-gray-400 text-sm font-medium">Pending Tickets</p>
+<p class="text-2xl md:text-3xl font-bold text-white mt-1">18</p>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Chart: AI Accuracy -->
+<div class="glass-panel rounded-2xl p-6 lg:col-span-2 flex flex-col">
+<div class="flex flex-wrap justify-between items-center mb-6 gap-2">
+<div>
+<h3 class="text-lg font-bold text-white">AI Model Accuracy Trend</h3>
+<p class="text-sm text-gray-400">Weekly performance metrics</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-3xl font-bold text-primary neon-text">98.5%</span>
+<span class="text-sm text-emerald-400 font-medium">↑ 1.2%</span>
+</div>
+</div>
+<!-- SVG Chart Area -->
+<div class="flex-1 min-h-[250px] w-full relative">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between text-xs text-gray-600">
+<div class="border-b border-white/5 w-full h-0"></div>
+<div class="border-b border-white/5 w-full h-0"></div>
+<div class="border-b border-white/5 w-full h-0"></div>
+<div class="border-b border-white/5 w-full h-0"></div>
+<div class="border-b border-white/5 w-full h-0"></div>
+</div>
+<!-- Chart SVG -->
+<svg class="absolute inset-0 w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 50">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#7f0df2" stop-opacity="0.5"></stop>
+<stop offset="100%" stop-color="#7f0df2" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Area Fill -->
+<path d="M0,50 L0,35 C10,35 10,25 20,28 C30,31 30,20 40,18 C50,16 50,25 60,22 C70,19 70,10 80,8 C90,6 90,12 100,5 L100,50 Z" fill="url(#chartGradient)"></path>
+<!-- Line Stroke -->
+<path d="M0,35 C10,35 10,25 20,28 C30,31 30,20 40,18 C50,16 50,25 60,22 C70,19 70,10 80,8 C90,6 90,12 100,5" fill="none" stroke="#7f0df2" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.8" style="filter: drop-shadow(0 0 4px rgba(127,13,242,0.6));"></path>
+<!-- Data Points -->
+<circle cx="20" cy="28" fill="#fff" r="1"></circle>
+<circle cx="40" cy="18" fill="#fff" r="1"></circle>
+<circle cx="60" cy="22" fill="#fff" r="1"></circle>
+<circle cx="80" cy="8" fill="#fff" r="1"></circle>
+</svg>
+</div>
+<!-- X Axis Labels -->
+<div class="flex justify-between mt-4 text-xs text-gray-500 font-mono">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+<!-- Secondary Chart: Circular Gauge -->
+<div class="glass-panel rounded-2xl p-6 flex flex-col items-center justify-center relative">
+<h3 class="text-lg font-bold text-white w-full text-left mb-2">System Health</h3>
+<p class="text-sm text-gray-400 w-full text-left mb-6">Uptime Monitor</p>
+<div class="relative h-48 w-48 flex items-center justify-center">
+<!-- Background Circle -->
+<svg class="h-full w-full rotate-[-90deg]" viewbox="0 0 36 36">
+<path class="text-white/5" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<!-- Value Circle (96%) -->
+<path class="text-accent-cyan" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="96, 100" stroke-linecap="round" stroke-width="3" style="filter: drop-shadow(0 0 6px rgba(0,240,255,0.6));"></path>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="text-4xl font-bold text-white">96%</span>
+<span class="text-xs text-accent-cyan font-medium uppercase tracking-wider">Uptime</span>
+</div>
+</div>
+<div class="w-full mt-6 grid grid-cols-2 gap-4 text-center">
+<div class="bg-white/5 rounded-lg py-2 border border-white/5">
+<p class="text-xs text-gray-400">Latency</p>
+<p class="text-sm font-bold text-white">24ms</p>
+</div>
+<div class="bg-white/5 rounded-lg py-2 border border-white/5">
+<p class="text-xs text-gray-400">Errors</p>
+<p class="text-sm font-bold text-emerald-400">0%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Row: Recent Transactions Table Style -->
+<div class="glass-panel rounded-2xl p-0 overflow-hidden mb-6">
+<div class="p-6 border-b border-white/5 flex justify-between items-center">
+<h3 class="text-lg font-bold text-white">Recent Activities</h3>
+<button class="text-sm text-primary hover:text-white transition-colors font-medium">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm text-gray-400">
+<thead class="bg-white/5 uppercase text-xs font-semibold text-gray-300">
+<tr>
+<th class="px-6 py-4">Activity</th>
+<th class="px-6 py-4">User</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Time</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-primary/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<span class="text-white font-medium">Model Retraining</span>
+</td>
+<td class="px-6 py-4">System AI</td>
+<td class="px-6 py-4"><span class="bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded-full text-xs border border-emerald-500/20">Completed</span></td>
+<td class="px-6 py-4">2 mins ago</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-accent-cyan/20 text-accent-cyan flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">login</span>
+</div>
+<span class="text-white font-medium">New User Login</span>
+</td>
+<td class="px-6 py-4">Sarah Connor</td>
+<td class="px-6 py-4"><span class="bg-blue-500/10 text-blue-400 px-2 py-1 rounded-full text-xs border border-blue-500/20">Verified</span></td>
+<td class="px-6 py-4">15 mins ago</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-orange-500/20 text-orange-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+<span class="text-white font-medium">API Limit Warning</span>
+</td>
+<td class="px-6 py-4">Enterprise Node #4</td>
+<td class="px-6 py-4"><span class="bg-orange-500/10 text-orange-400 px-2 py-1 rounded-full text-xs border border-orange-500/20">Pending</span></td>
+<td class="px-6 py-4">42 mins ago</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

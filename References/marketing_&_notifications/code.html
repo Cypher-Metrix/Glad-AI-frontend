@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Marketing &amp; Notifications - GLAD AI</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f0df2",
+                        "primary-hover": "#650bc2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#141118",
+                        "card-dark": "#1e1726",
+                        "input-dark": "#211b27",
+                        "border-dark": "#473b54",
+                        "text-secondary": "#ab9cba"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+        
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #141118; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #473b54; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b5a7c; 
+        }
+        
+        /* Neon Glow Utility */
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(127, 13, 242, 0.4);
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 10px rgba(127, 13, 242, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden selection:bg-primary selection:text-white">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="w-72 flex-shrink-0 flex flex-col justify-between border-r border-border-dark/30 bg-[#141118] py-6 px-4 hidden lg:flex">
+<div class="flex flex-col gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-3 px-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg h-10 w-10 bg-gradient-to-br from-primary to-purple-900 flex items-center justify-center neon-glow" data-alt="GLAD AI Logo Abstract">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">rocket_launch</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-xl font-bold tracking-tight">GLAD AI</h1>
+<p class="text-text-secondary text-xs font-medium tracking-wider">ADMIN PANEL</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-1">
+<div class="px-3 py-2 text-xs font-bold text-text-secondary/50 uppercase tracking-widest">System</div>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">receipt_long</span>
+<span class="text-sm font-medium">Transaction Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">payments</span>
+<span class="text-sm font-medium">Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-white/5 hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">query_stats</span>
+<span class="text-sm font-medium">AI Performance</span>
+</a>
+<!-- Active Link -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary text-white neon-glow" href="#">
+<span class="material-symbols-outlined fill-current">campaign</span>
+<span class="text-sm font-bold">Notifications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-secondary hover:bg-white/5 hover:text-white transition-colors group mt-2" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Profile -->
+<div class="flex flex-col gap-4">
+<div class="h-px w-full bg-border-dark/50"></div>
+<div class="flex items-center gap-3 px-2">
+<div class="relative">
+<div class="h-10 w-10 rounded-full bg-cover bg-center border-2 border-border-dark" data-alt="Portrait of Alex Morgan" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPHwKQpC73czeIIXuD4dZxrOn3ZeATNAV8YhGYBvrhR3jJgzIjtZYQPoU40XJ8QdT33X3NYm2DKZ_Pr9QcR0TR78sNOZTLuypN_zeGSM5Cww5BW_wKLyw9oLMDiaRK8RMVmoUbubolHKyOkgrWedNlDpYhmYShhaCs_n7dHeweYFiPRMy5WVanN7xetmmwasId6OUxlD-lFG71SseQbzUmci05uLhZ9eYCqrdexaPT8JDC6hdPSBxes57Xfwk8vAYQMa_5pgcbxtKh');"></div>
+<div class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-[#141118]"></div>
+</div>
+<div class="flex flex-col">
+<p class="text-white text-sm font-bold leading-none">Alex Morgan</p>
+<p class="text-text-secondary text-xs mt-1">Super Admin</p>
+</div>
+<button class="ml-auto text-text-secondary hover:text-white">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative">
+<!-- Mobile Header (Visible only on small screens) -->
+<header class="lg:hidden flex items-center justify-between p-4 border-b border-border-dark bg-[#141118]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+<span class="font-bold text-white">GLAD AI</span>
+</div>
+<button class="text-white"><span class="material-symbols-outlined">menu</span></button>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12 pb-24">
+<div class="max-w-7xl mx-auto flex flex-col gap-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div class="flex flex-col gap-2">
+<h2 class="text-white text-3xl md:text-4xl font-black tracking-tight">Marketing &amp; Notifications</h2>
+<p class="text-text-secondary text-base">Manage push campaigns, target users, and analyze engagement.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-card-dark border border-border-dark text-white hover:bg-white/5 transition">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="text-sm font-medium">Archived</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-transparent text-white hover:bg-white/10 transition">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="text-sm font-medium">Help Guide</span>
+</button>
+</div>
+</div>
+<!-- Layout Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Composer & History (8 cols) -->
+<div class="xl:col-span-8 flex flex-col gap-8">
+<!-- Composer Card -->
+<div class="bg-card-dark rounded-xl border border-border-dark/50 overflow-hidden shadow-xl">
+<div class="p-6 border-b border-border-dark/50 flex justify-between items-center bg-white/[0.02]">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">edit_square</span>
+</div>
+<h3 class="text-white text-lg font-bold">New Campaign</h3>
+</div>
+<span class="px-2 py-1 rounded bg-yellow-500/10 text-yellow-500 text-xs font-bold border border-yellow-500/20">DRAFT</span>
+</div>
+<div class="p-6 md:p-8 flex flex-col gap-6">
+<!-- Inputs Row -->
+<div class="flex flex-col gap-5">
+<div class="flex flex-col gap-2">
+<label class="text-white text-sm font-medium">Campaign Title</label>
+<input class="w-full bg-input-dark border border-border-dark rounded-lg px-4 py-3 text-white placeholder-text-secondary focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="e.g. Summer AI Update 🚀" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-white text-sm font-medium">Notification Body</label>
+<div class="relative">
+<textarea class="w-full bg-input-dark border border-border-dark rounded-lg px-4 py-3 pb-8 text-white placeholder-text-secondary focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all min-h-[120px] resize-none" placeholder="Write your compelling message here..."></textarea>
+<span class="absolute bottom-3 right-3 text-xs text-text-secondary">0/140</span>
+</div>
+</div>
+</div>
+<!-- Image Upload -->
+<div class="flex flex-col gap-2">
+<label class="text-white text-sm font-medium">Media Attachment (Optional)</label>
+<div class="border-2 border-dashed border-border-dark rounded-xl p-8 flex flex-col items-center justify-center gap-3 hover:border-primary/50 hover:bg-white/[0.02] transition cursor-pointer group">
+<div class="h-12 w-12 rounded-full bg-input-dark flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">add_photo_alternate</span>
+</div>
+<div class="text-center">
+<p class="text-white text-sm font-medium">Click to upload or drag and drop</p>
+<p class="text-text-secondary text-xs mt-1">SVG, PNG, JPG (max. 800x400px)</p>
+</div>
+</div>
+</div>
+<div class="h-px bg-border-dark/50 w-full my-2"></div>
+<!-- Targeting & Schedule -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Targeting -->
+<div class="flex flex-col gap-3">
+<label class="text-white text-sm font-medium flex items-center gap-2">
+                                                Target Audience
+                                                <span class="material-symbols-outlined text-text-secondary text-[16px]">info</span>
+</label>
+<div class="flex flex-col gap-2">
+<label class="relative flex items-center gap-3 p-3 rounded-lg border border-border-dark bg-input-dark cursor-pointer hover:border-primary/50 transition">
+<input checked="" class="w-4 h-4 text-primary bg-transparent border-gray-500 focus:ring-primary focus:ring-offset-0" name="audience" type="radio"/>
+<div class="flex flex-col">
+<span class="text-white text-sm font-medium">All Users</span>
+<span class="text-text-secondary text-xs">Approx. 24.5k recipients</span>
+</div>
+</label>
+<div class="grid grid-cols-2 gap-2">
+<label class="relative flex items-center gap-2 p-3 rounded-lg border border-border-dark bg-input-dark cursor-pointer hover:border-primary/50 transition opacity-60 hover:opacity-100">
+<input class="w-4 h-4 text-primary bg-transparent border-gray-500 focus:ring-primary focus:ring-offset-0" name="audience" type="radio"/>
+<span class="text-white text-sm font-medium">Free Tier</span>
+</label>
+<label class="relative flex items-center gap-2 p-3 rounded-lg border border-border-dark bg-input-dark cursor-pointer hover:border-primary/50 transition opacity-60 hover:opacity-100">
+<input class="w-4 h-4 text-primary bg-transparent border-gray-500 focus:ring-primary focus:ring-offset-0" name="audience" type="radio"/>
+<span class="text-white text-sm font-medium">Premium</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Schedule -->
+<div class="flex flex-col gap-3">
+<label class="text-white text-sm font-medium">Delivery Schedule</label>
+<div class="flex gap-2 mb-2">
+<button class="flex-1 py-2 px-3 rounded-md bg-primary text-white text-sm font-medium shadow-lg shadow-primary/25">Send Now</button>
+<button class="flex-1 py-2 px-3 rounded-md bg-transparent border border-border-dark text-text-secondary hover:text-white text-sm font-medium hover:bg-white/5 transition">Schedule</button>
+</div>
+<div class="relative">
+<input class="w-full bg-input-dark border border-border-dark rounded-lg px-4 py-3 text-text-secondary focus:ring-2 focus:ring-primary outline-none text-sm appearance-none" disabled="" type="datetime-local"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-text-secondary pointer-events-none">calendar_month</span>
+</div>
+<p class="text-xs text-text-secondary mt-1">Campaign will start immediately after approval.</p>
+</div>
+</div>
+<!-- Main Actions -->
+<div class="flex justify-end pt-4 gap-3">
+<button class="px-6 py-3 rounded-lg border border-border-dark text-white font-medium hover:bg-white/5 transition">Save Draft</button>
+<button class="px-8 py-3 rounded-lg bg-primary hover:bg-primary-hover text-white font-bold tracking-wide shadow-lg shadow-primary/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+<span class="material-symbols-outlined">send</span>
+                                            Launch Campaign
+                                        </button>
+</div>
+</div>
+</div>
+<!-- History Section -->
+<div class="flex flex-col gap-4">
+<h3 class="text-white text-xl font-bold px-1">Campaign History</h3>
+<div class="bg-card-dark rounded-xl border border-border-dark/50 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-white/5 border-b border-border-dark/50">
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider">Campaign Name</th>
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider">Audience</th>
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider">Date Sent</th>
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider">Status</th>
+<th class="p-4 text-xs font-bold text-text-secondary uppercase tracking-wider w-32">Open Rate</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark/30">
+<tr class="hover:bg-white/[0.02] transition">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-blue-500/20 flex items-center justify-center text-blue-400">
+<span class="material-symbols-outlined text-sm">rocket</span>
+</div>
+<span class="text-white font-medium text-sm">Pro Feature Launch</span>
+</div>
+</td>
+<td class="p-4 text-text-secondary text-sm">All Users</td>
+<td class="p-4 text-text-secondary text-sm">Oct 24, 2023</td>
+<td class="p-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-400 border border-green-500/20">Sent</span></td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs text-white">
+<span>42%</span>
+</div>
+<div class="w-full bg-white/10 rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full neon-glow" style="width: 42%"></div>
+</div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-purple-500/20 flex items-center justify-center text-purple-400">
+<span class="material-symbols-outlined text-sm">celebration</span>
+</div>
+<span class="text-white font-medium text-sm">Weekend Promo</span>
+</div>
+</td>
+<td class="p-4 text-text-secondary text-sm">Free Only</td>
+<td class="p-4 text-text-secondary text-sm">Oct 18, 2023</td>
+<td class="p-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-400 border border-green-500/20">Sent</span></td>
+<td class="p-4">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs text-white">
+<span>18%</span>
+</div>
+<div class="w-full bg-white/10 rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 18%"></div>
+</div>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-orange-500/20 flex items-center justify-center text-orange-400">
+<span class="material-symbols-outlined text-sm">schedule</span>
+</div>
+<span class="text-white font-medium text-sm">System Downtime</span>
+</div>
+</td>
+<td class="p-4 text-text-secondary text-sm">Premium</td>
+<td class="p-4 text-text-secondary text-sm">Nov 01, 2023</td>
+<td class="p-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">Scheduled</span></td>
+<td class="p-4">
+<span class="text-text-secondary text-xs">-</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-border-dark/50 flex justify-center">
+<button class="text-primary text-sm font-medium hover:text-white transition-colors">View All Campaigns</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Mobile Preview (4 cols) -->
+<div class="xl:col-span-4">
+<div class="sticky top-8">
+<div class="flex flex-col gap-4 items-center">
+<h3 class="text-text-secondary text-sm uppercase tracking-widest font-bold">Live Preview</h3>
+<!-- Phone Frame -->
+<div class="relative w-[300px] h-[600px] bg-[#0f0c13] rounded-[3rem] border-8 border-[#2d2436] shadow-2xl overflow-hidden select-none">
+<!-- Notch/Dynamic Island -->
+<div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-28 h-7 bg-[#2d2436] rounded-b-xl z-20"></div>
+<!-- Screen Content -->
+<div class="w-full h-full bg-cover bg-center relative" data-alt="Abstract gradient phone wallpaper" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVTt_OuWme6tvlVsvtKkrI-M3DDxDUbpVcGmf8UDl2lDawv9mpwm5V3jXQhYi41g5cz8d9r67DuM5xEcga8rbZ-AX74sAKpfsP6dIT5ceaZw5HfWyPW98v-xNaIPnvi-9yuYNw9vgsHlctcAExrgvRrNlXQ_rojF2wOW9d6isvAVcRetAzM9QvnTYcn9O2q4UYDZWc0Ahc2-Tch6Liee-AkgUh7KIpbTmCjovcwNSvLLHbHTna6BRjblygPGqg8qIeSO4h2k_MGiWI');">
+<!-- Status Bar -->
+<div class="w-full h-12 flex justify-between items-center px-6 pt-2 text-white text-xs font-medium z-10 relative">
+<span>9:41</span>
+<div class="flex gap-1.5">
+<span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[14px]">wifi</span>
+<span class="material-symbols-outlined text-[14px]">battery_full</span>
+</div>
+</div>
+<!-- Date Time Lock Screen -->
+<div class="flex flex-col items-center mt-8 text-white drop-shadow-md">
+<div class="text-6xl font-thin tracking-tighter">09:41</div>
+<div class="text-lg font-medium">Tuesday, October 24</div>
+</div>
+<!-- Notification Card -->
+<div class="mt-8 mx-3">
+<div class="bg-white/20 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-white/20 overflow-hidden animate-pulse-slow">
+<div class="flex gap-3 mb-2">
+<div class="h-5 w-5 rounded bg-black flex items-center justify-center">
+<div class="h-3 w-3 rounded-full bg-gradient-to-tr from-primary to-purple-400"></div>
+</div>
+<div class="flex justify-between w-full">
+<span class="text-xs font-bold text-white/90 uppercase tracking-wide">GLAD AI</span>
+<span class="text-[10px] text-white/70">now</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-bold text-white leading-tight">Summer AI Update 🚀</p>
+<p class="text-xs text-white/90 leading-snug">Discover the new features we just launched! Your workflow is about to get 10x faster.</p>
+</div>
+</div>
+</div>
+<!-- Bottom Actions -->
+<div class="absolute bottom-6 w-full flex justify-between px-10">
+<div class="h-12 w-12 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]">flashlight_on</span>
+</div>
+<div class="h-12 w-12 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]">photo_camera</span>
+</div>
+</div>
+<!-- Home Bar -->
+<div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="text-center text-xs text-text-secondary max-w-[250px]">
+<p>Preview shows how the notification will appear on an iOS Lock Screen.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
