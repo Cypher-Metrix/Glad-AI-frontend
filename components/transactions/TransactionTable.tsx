@@ -130,16 +130,13 @@ export default function TransactionTable({ transactions }: TransactionTableProps
                 <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark hidden md:table-cell">
                   Category
                 </th>
-                <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark">
-                  Status
-                </th>
                 <th className="py-3 md:py-4 px-4 md:px-6 text-xs font-semibold uppercase tracking-wider text-text-secondary border-b border-border-dark w-10"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border-dark font-mono text-sm">
               {currentTransactions.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-12 text-center text-text-secondary font-display">
+                  <td colSpan={7} className="py-12 text-center text-text-secondary font-display">
                     <Icon name="receipt_long" className="text-[40px] mb-2 block mx-auto opacity-40" />
                     No transactions found
                   </td>
@@ -174,9 +171,6 @@ export default function TransactionTable({ transactions }: TransactionTableProps
                     </td>
                     <td className="py-3 md:py-4 px-4 md:px-6 text-white font-bold tracking-wide">{transaction.amount}</td>
                     <td className="py-3 md:py-4 px-4 md:px-6 text-text-secondary font-display hidden md:table-cell">{transaction.category}</td>
-                    <td className="py-3 md:py-4 px-4 md:px-6 font-display">
-                      {getStatusBadge(transaction.status)}
-                    </td>
                     <td className="py-3 md:py-4 px-4 md:px-6 text-right">
                       <button className="text-text-secondary hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
                         <Icon name="more_vert" className="text-[20px]" />
@@ -218,6 +212,6 @@ export default function TransactionTable({ transactions }: TransactionTableProps
           )}
         </div>
       </div>
-    </div>
+    </div >
   )
 }
