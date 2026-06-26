@@ -1,16 +1,11 @@
 
 'use server'
 
-import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-const supabaseAdmin = createClient(supabaseUrl, supabaseKey)
+import { supabase } from '@/lib/supabase'
 
 export async function getCampaigns() {
     try {
-        const { data, error } = await supabaseAdmin
+        const { data, error } = await supabase
             .from('notifications')
             .select('*')
             .order('created_at', { ascending: false })
