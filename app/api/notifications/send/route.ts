@@ -4,6 +4,14 @@ import { messaging } from '@/lib/firebase-admin';
 import { supabase } from '@/lib/supabase';
 
 export async function POST(request: Request) {
+    // ── Auth guard ──────────────────────────────────────────────────────────
+    const apiSecret = process.env.NOTIFICATIONS_API_SECRET;
+    const authHeader = request.headers.get('authorization');
+    if (!apiSecret || authHeader !== `Bearer ${apiSecret}`) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    // ────────────────────────────────────────────────────────────────────────
+
     try {
         const { title, body, token, topic, image, scheduledFor } = await request.json();
 
