@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import { useRouter } from 'next/navigation'
 import Icon from '@/components/Icon'
@@ -15,8 +15,13 @@ export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false)
 
     // Redirect if already logged in
+    useEffect(() => {
+        if (!isLoading && adminUser) {
+            router.replace('/')
+        }
+    }, [isLoading, adminUser, router])
+
     if (!isLoading && adminUser) {
-        router.replace('/')
         return null
     }
 

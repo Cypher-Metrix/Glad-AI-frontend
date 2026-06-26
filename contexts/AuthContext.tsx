@@ -79,8 +79,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     async function signIn(email: string, password: string): Promise<{ error: string | null }> {
         try {
-            const { error } = await supabase.auth.signInWithPassword({ email, password })
+            const { data, error } = await supabase.auth.signInWithPassword({ email, password })
             if (error) return { error: error.message }
+            
+            if (data.user) {
+                const { data: adminData, error: adminError } = await supabase
+                    .from('admin_users')
+                    .select('*')
+                    .eq('email', email)
+                    .single()
+                    
+                if (adminData && !adminError) {
+                    setAdminUser(adminData as AdminUser)
+                    return { error: null }
+                } else {
+                    await supabase.auth.signOut()
+                    return { error: 'Access denied: You are not registered as an admin.' }
+                }
+            }
             return { error: null }
         } catch (e: any) {
             return { error: e.message || 'An unexpected error occurred' }
