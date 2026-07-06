@@ -93,7 +93,10 @@ export default function NotificationComposer({
 
       const res = await fetch('/api/notifications/send', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_NOTIFICATIONS_API_SECRET}`,
+        },
         body: JSON.stringify(payload),
       });
 

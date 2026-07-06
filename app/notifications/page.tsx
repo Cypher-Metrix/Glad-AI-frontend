@@ -21,7 +21,12 @@ export default function NotificationsPage() {
   useEffect(() => {
     const processScheduled = async () => {
       try {
-        await fetch('/api/notifications/process-scheduled', { method: 'POST' });
+        await fetch('/api/notifications/process-scheduled', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_NOTIFICATIONS_API_SECRET}`,
+          },
+        });
       } catch (err) {
         console.error('Scheduler poll failed:', err);
       }
